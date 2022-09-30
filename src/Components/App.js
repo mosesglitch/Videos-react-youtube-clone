@@ -5,13 +5,20 @@ import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
 class App extends Component {
   state = { videos: [], selectedVideo: null };
+
+  componentDidMount() {
+    this.onTextSubmit("cars");
+  }
   onTextSubmit = async (text) => {
     const response = await Youtube.get("/search", {
       params: {
         q: text,
       },
     });
-    this.setState({ videos: response.data.items });
+    this.setState({
+      selectedVideo: response.data.items[0],
+      videos: response.data.items,
+    });
   };
   onVideoSelect = (video) => {
     this.setState({ selectedVideo: video });
