@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import Youtube from "../apis/Youtube";
+import VideoList from "./VideoList";
 class App extends Component {
   state = { videos: [] };
   onTextSubmit = async (text) => {
@@ -14,8 +15,8 @@ class App extends Component {
   render() {
     return (
       <div className="ui container">
-        <SearchBar onFormSubmit={this.onTextSubmit} />I have{" "}
-        {this.state.videos.length} videos.
+        <SearchBar onFormSubmit={this.onTextSubmit} />
+        <VideoList videos={this.state.videos} />
       </div>
     );
   }
