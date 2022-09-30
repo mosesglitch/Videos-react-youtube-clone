@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import Youtube from "../apis/Youtube";
 import VideoList from "./VideoList";
+import VideoDetail from "./VideoDetail";
 class App extends Component {
   state = { videos: [], selectedVideo: null };
   onTextSubmit = async (text) => {
@@ -13,12 +14,13 @@ class App extends Component {
     this.setState({ videos: response.data.items });
   };
   onVideoSelect = (video) => {
-    console.log("from video", video);
+    this.setState({ selectedVideo: video });
   };
   render() {
     return (
       <div className="ui container">
         <SearchBar onFormSubmit={this.onTextSubmit} />
+        <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           videos={this.state.videos}
           onVideoSelect={this.onVideoSelect}
